@@ -1,0 +1,39 @@
+<div class="toast-top-right">
+  <ng-container *ngFor="let notification of notifications">
+    <div
+      *ngIf="notification.show"
+      id="toast-container"
+      role="button"
+      (click)="removeNotification(notification)"
+    >
+      <div
+        class="toast toast-{{ notification.type }}"
+        aria-live="polite"
+        style="display: block"
+      >
+        <div class="toast-title">
+          {{ notification.title }}
+        </div>
+        <div class="toast-message">
+          {{ notification.msg }}
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <div *ngIf="moreThanFive">
+    <button *ngIf="hide" (click)="hide = false" class="btn">Show</button
+    ><button *ngIf="!hide" (click)="hide = true" class="btn">Hide</button>
+
+    <div *ngIf="!hide" class="toast-group">
+      <div *ngFor="let notification of aboveFive" class="toast-container-group">
+        <div *ngIf="notification.show">
+          <div class="toast-container-group-text-{{ notification.type }}">
+            <b style="margin-left: 5px">{{ notification.title }}:</b>
+            {{ notification.msg }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
